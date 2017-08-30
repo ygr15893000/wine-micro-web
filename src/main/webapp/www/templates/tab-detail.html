@@ -1,0 +1,39 @@
+<ion-view hide-nav-bar="true">
+  <ion-content style="background:#222">
+    <ion-slide-box does-continue="true" auto-play="true" on-slide-changed="slideHasChanged($index)">
+      <ion-slide>
+        <div class="picPad"> <img src="img/focus1.png" /> </div>
+      </ion-slide>
+      <ion-slide>
+        <div class="picPad"> <img src="img/focus1.png" /> </div>
+      </ion-slide>
+      <ion-slide>
+        <div class="picPad"> <img src="img/focus1.png" /> </div>
+      </ion-slide>
+    </ion-slide-box>
+    <div class="row">
+	    <div class="col" style="background:#000;padding:1rem">
+		    <h2 class="proIntro">{{msgdata.title}}</h2>
+		    <p class="proDetail">简介：容伊丽莎白一世在位45年，外出巡视均要专程携带艾尔啤酒以备饮用，女王一直钟情“艾尔”啤酒，竟然终身未随着新大陆的发现及英国的扩张强大美国”艾尔“啤酒厂被一把大火烧毁，1813年重建恢复生工厂的董事长马修先生子承父业。</p>
+		    <p class="proDetail">类别：酒类</p>
+		    <p class="proDetail">规格：{{msgdata.specification}}</p>
+		    <p class="proDetail">价格：{{msgdata.price}}/瓶</p>
+		    <p class="proDetail">折扣：通过链接分享享<em>{{msgdata.remark}}折，{{Actualprice}}元/套</em></p>
+	    </div>
+    </div>
+    <div class="row" style="margin:0.2rem 0;">
+	    <div class="col" style="background:#000;padding:0;overflow: hidden">
+		    <img src="img/demo5.png" style="max-width: 100%;float:left;" />
+	    </div>
+    </div>
+    <div class="row" style="padding:0">
+	    <div class="col col-67" style="padding:0">
+		    <a class="buy" ng-click="purchase()">购买</a>
+	    </div>
+	    <div class="col col-33" style="padding:0">
+		    <a class="share">分享二维码</a>
+	    </div>
+	    
+    </div>
+  </ion-content>
+</ion-view>

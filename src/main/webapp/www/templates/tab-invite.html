@@ -1,0 +1,53 @@
+<ion-view hide-nav-bar="true">
+	<ion-content style="background:#222">
+	    <div class="invPad">
+		    <div class="row">
+			    <div class="col" style="border-right: 1px solid #333">
+				    <p><strong>{{setdata.invitecount}}人</strong></p>
+				    <p>邀请用户</p>
+			    </div>
+			    <div class="col">
+				    <a ><p><strong>{{setdata.decutAmountSum|evilmoney}}元</strong></p>
+				    <p>累&nbsp;积&nbsp;返&nbsp;利</p></a>
+			    </div>
+		    </div>
+		    <div class="row">
+			    <div class="col">
+				    <a class="inv" ng-click="newuser()">邀请新用户</a>
+			    </div>
+		    </div>
+	    </div>
+	    <div class="row invSubNav">
+		    <div class="col" style="padding:0" ng-click="suffix=1">
+			    <a class="User_list">用户列表</a>
+		    </div>
+		    <div class="col"  style="padding:0" ng-click="suffix=2">
+			    <a class="User_list">返利记录</a>
+		    </div>
+	    </div>
+	    <div class="row" ng-if="suffix==1">
+		    <div class="col" style="background:#000">
+			    <table class="dataA">
+				    <tr><th>用户名</th><th>邀请时间</th></tr>
+				    <tr ng-repeat="c in setdata.recommendUserList">
+				    	<td>{{c.userName}}</td>
+				    	<td>{{c.createTime}}</td>
+				    </tr>
+			    </table>
+		    </div>
+	    </div>
+	    <div class="row" ng-if="suffix==2">
+		    <div class="col" style="background:#000">
+			    <table class="dataA">
+				    <tr><th>用户名</th><th>返利时间</th><th>交易金额</th><th>单个返利</th></tr>
+				    <tr ng-repeat="x in setdata.decttDetaillist">
+				    	<td>{{x.userName}}</td>
+				    	<td>{{x.createtime}}</td>
+				    	<td>{{x.amount}}</td>
+				    	<td>{{x.decutAmount}}</td>
+				    </tr>
+			    </table>
+		    </div>
+	    </div>
+	</ion-content>
+</ion-view>

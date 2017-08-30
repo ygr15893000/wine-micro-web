@@ -1,0 +1,71 @@
+<ion-view hide-nav-bar="true" hideTabs>
+  <ion-content style="background:#262626">
+    <div class="row" style="background:#000;padding-bottom:0">
+      <div class="col col-33" style="padding-bottom: 0">
+        <a class="kinds" ng-class="{true:'Shopping'}[index==1]" ng-click="index=1">待支付</a>
+      </div>
+      <div class="col col-33" style="padding-bottom: 0">
+        <a class="kinds" ng-class="{true:'Shopping'}[index==2]" ng-click="index=2">待收货</a>
+      </div>
+      <div class="col col-33" style="padding-bottom: 0">
+        <a class="kinds" ng-class="{true:'Shopping'}[index==3]" ng-click="index=3">已完成</a>
+      </div>
+    </div>
+
+    <div class="row" style="background:#000;margin-top:1rem;" ng-repeat="c in particular" ng-if="index==1&&(c.status==1||c.status==2)">
+      <div class="col" style="padding:0.9rem 0.6rem 0.6rem 0.6rem" ng-click="particulars(c.id)">
+        <dl class="orderPad">
+          <dd class="face"><a><img src="img/demo1.png" /></a></dd>
+          <dd>
+            <p class="tit">{{c.title}}</p>
+            <p>购买数量：{{c.num}}</p>
+            <p>已支付：<em class="discount">{{c.firstPay}}</em>，待支付：<em class="discount">{{c.endPay}}</em></p>
+          </dd>
+          <dd class="check" ng-click="$event.stopPropagation();">
+            <a ng-click="Tobepaid(c.id)">支付</a>
+          </dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="row" style="background:#000;margin-top:1rem;" ng-repeat="c in particular" ng-if="index==2&&(c.status==3||c.status==6||c.status==7)">
+      <div class="col" style="padding:0.9rem 0.6rem 0.6rem 0.6rem" ng-click="particulars()">
+        <dl class="orderPad">
+          <dd class="face"><a><img src="img/demo1.png" /></a></dd>
+          <dd>
+            <p class="tit">{{c.title}}</p>
+            <p>购买数量：{{c.num}}</p>
+            <!-- <p>{{c.shippingCode}}</p> -->
+            <p>订单状态：{{c.status|condition}}</p>
+          </dd>
+          <dd class="check" ng-click="$event.stopPropagation();">
+            <div style="background:#c22523;color: #fff;text-align: center;width:3.6rem;height: 3.6rem;line-height: 3.6rem;padding-top: 3px;line-height: 26px;" ng-click="logistics()">
+              <div>查&nbsp;看</div>
+              <div>物&nbsp;流</div>
+            </div>
+          </dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="row" style="background:#000;margin-top:1rem;" ng-repeat="c in particular" ng-if="index==3&&(c.status==4||c.status==5||c.status==10||c.status==11||c.status==12||c.status==9||c.status==8)">
+      <div class="col" style="padding:0.9rem 0.6rem 0.6rem 0.6rem">
+        <dl class="orderPad">
+          <dd class="face"><a><img src="img/demo1.png" /></a></dd>
+          <dd>
+            <p class="tit">{{c.title}}</p>
+            <p>购买数量：{{c.num}}</p>
+            <p>订单状态：{{c.status|condition}}</p>
+          </dd>
+          <dd class="check">
+            <div style="background:#c22523;color: #fff;text-align: center;width:3.6rem;height: 3.6rem;line-height: 3.6rem;padding-top: 3px;line-height: 26px;" ng-click="logistics()">
+              <div>查&nbsp;看</div>
+              <div>物&nbsp;流</div>
+            </div>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    
+  </ion-content>
+</ion-view>

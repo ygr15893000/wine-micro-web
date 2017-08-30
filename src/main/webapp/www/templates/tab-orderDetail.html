@@ -1,0 +1,46 @@
+<ion-view hide-nav-bar="true">
+  <ion-content style="background:#262626">
+    <div class="row" style="background:#000">
+      <div class="col" style="padding:0.9rem;">
+        <dl class="orderDetail">
+          <dt>订单号：{{msgdata.orderNO}}</dt>
+          <dd class="face"><img src="img/demo1.png" /></dd>
+          <dd>
+            <p class="tit">{{msgdata.title}}</p>
+            <p>规格：{{msgdata.specification}}</p>
+            <p>价格：{{msgdata.price}}/套</p>
+          </dd>
+          <dd class="count">
+            x3
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col" style="padding:1rem">
+        <h2 class="orderDetailh2">订单信息</h2>
+        <ul class="recipient">
+          <li>下单时间：<em>{{msgdata.createTime}}</em></li>
+          <li>付款时间：<em>{{msgdata.paymenTime}}</em></li>
+          <li>商品小计：<em>{{msgdata.amount}}元</em></li>
+         <!-- <li>优惠券：<em>2张代金券，共抵金额123元，1张折扣券，共抵金额23元</em></li>-->
+          <li>实际金额：<em style="color:#b2352d">{{msgdata.realAmount}}元</em></li>
+        </ul>
+        <h2 class="orderDetailh2">物流信息</h2>
+        <ul class="recipient">
+          <li>配送方式：<em>{{msgdata.shippingName}}</em></li>
+          <li>收件人：<em>{{msgdata.receiverName}}</em></li>
+          <li>联系方式：<em>{{msgdata.receiverMobile}}</em></li>
+          <li>收件地址：<em>{{msgdata.receiverAddress}}</em></li>
+          <!--<li>留言：<em>配送前一天提前告知，不然某得人搬的来又自己搬回克</em></li>-->
+          
+        </ul>
+      </div>
+    </div>
+   <!-- <div class="row">
+	    <div class="col">
+		    <a class="pay" href="#">共支付{{msgdata.realAmount}}元，立即去支付</a>
+	    </div>
+    </div>-->
+  </ion-content>
+</ion-view>

@@ -1,0 +1,158 @@
+
+演示地址
+https://github.com/gejun123456/MyBatisCodeHelper
+
+
+insert
+insertSelective
+insertList
+update
+delete
+find
+findById
+findAgeById
+findByUserName
+countByIdBetween
+findByIdGreaterThanOrEqualTo
+findByIdLessThanOrEqualTo
+findByIdBetweenOrEqualTo
+count
+findDistinctUserName
+findDistinctUserNameOrderByGlobalIdDesc
+deleteById
+deleteByIdBetween
+countDistinctUserNameByAgeLessThan
+findFirstByUserName
+findUserNameAndPasswordByIdBetween
+findByIdGreaterThan
+findByIdLessThan
+findByIdBetween
+findDistinctUserNameByIdIn
+findByAgeGreaterThanAndIdLessThan
+findByAgeOrderByUserNameDesc
+findByIdInAndUserNameIn
+updateUserNameById
+updateUserNameAndPasswordByIdBetween
+
+
+
+使用方法
+
+在数据库对象上使用alt+insert （generate mybatis files）生成对应的dao xml文件等 （mac上使用 ctrl+N 即getter setter对应的快捷键)
+当数据库对象添加字段后也可使用alt+insert （generate mybatis files）来生成更新后的xml。（只会更新默认的insert,insertList,update方法 其他自定义的方法不会变）
+在mybatis的接口文件上的方法名上使用alt+enter generatedaoxml 生成对应的mybatis sql及方法的补全
+需要注意的点
+
+使用方法名生成sql 需要在接口中提供一个insert或save或add方法并以数据库对象为第一参数 (可以通过数据库对象自动生成)
+使用方法名生成的sql的字段会从数据库对象对应的resultMap中的数据库字段来设置。
+现在支持的数据库对象字段类型
+
+字段类型	开始支持的版本
+java.lang.Integer	v1.2
+java.lang.Long	v1.2
+java.lang.FLoat	v1.2
+java.lang.Double	v1.2
+java.lang.Boolean	v1.2
+java.util.Date	v1.2
+java.lang.String	v1.2
+java.lang.Byte	v1.2
+java.math.BigDecimal	v1.2
+java.lang.Short	v1.2
+方法名生成sql
+
+数据库对象User
+
+字段名	类型
+id	Integer
+userName	String
+password	String
+表名为user
+
+xml中对应的resultMap为
+
+<resultMap id="AllCoumnMap" type="com.codehelper.domain.User">
+    <result column="id" property="id"/>
+    <result column="user_name" property="userName"/>
+    <result column="password" property="password"/>
+</resultMap>
+以下是方法名与sql的对应关系(方法名的大小写无所谓)
+
+可以跟在字段后面的比较符有
+
+比较符	生成sql
+between	prop > {} and prop <{}
+betweenOrEqualto	prop >={} and prop <={} v1.3
+lessThan	prop < {}
+lessThanOrEqualto	prop <={} v1.3
+greaterThan	prop > {}
+greaterThanOrEqualto	prop >={} v1.3
+isnull	prop is null
+notnull	prop is not null
+like	prop like {}
+in	prop in {}
+notin	prop not in {}
+not	prop != {}
+notlike	prop not like {}
+find方法
+支持获取多字段，by后面可以设置多个字段的条件 一个字段后面只能跟一个比较符 支持orderBy,distinct, findFirst
+
+方法名	sql
+find	select * from user
+findUserName	select user_name from user
+findById	select * from user where id = {}
+findByIdGreaterThanAndUserName	select * from user where id > {} and user_name = {}
+findByIdGreaterThanOrIdLessThan	select * from user where id > {} or id < {}
+findByIdLessThanAndUserNameIn	select * from user where id < {} and user_name in {}
+findByUserNameAndPassword	select * from user where user_name = {} and password = {}
+findUserNameOrderByIdDesc	select user_name from user order by id desc
+findDistinctUserNameByIdBetween	select distinct(user_name) from user where id >= {} and id <={}
+findFirstByIdGreaterThan	select * from user where id > {} limit 1
+findFirst20ByIdLessThan	select * from user where id < {} limit 20
+findFirst10ByIdGreaterThanOrderByUserName	select * from user where id > {} order by user_name limit 10
+update方法 by后面设置的条件同上
+方法名	sql
+updateUserNameById	update user set user_name = {} where id = {}
+updateUserNameAndPasswordByIdIn	update user set user_name = {} and password = {} where id in {}
+delete方法 by后面设置的条件同上
+方法名	sql
+deleteById	delete from user where id = {}
+deleteByUserNameIsNull	delete from user where user_name is null
+count方法 by后面设置的条件同上 支持distinct
+方法名	sql
+count	select count(1) from user
+countDistinctUserNameByIdGreaterThan	select count(distinct(user_name)) from user where id > {}
+
+  int insert(@Param("pojo") MyUser pojo);
+
+    int insertSelective(@Param("pojo") MyUser pojo);
+
+    int insertList(@Param("pojos") List<MyUser> pojo);
+
+    int update(@Param("pojo") MyUser pojo);
+
+    int delete();
+            List<MyUser> find();
+    MyUser findById(@Param("id") Integer id);
+            Integer findAgeById(@Param("id") Integer id);
+    List<MyUser> findByUserName(@Param("userName") String userName);
+            Integer countByIdBetween(@Param("minId") Integer minId, @Param("maxId") Integer maxId);
+    List<MyUser> findByIdGreaterThanOrEqualTo(@Param("minId") Integer minId);
+            List<MyUser> findByIdLessThanOrEqualTo(@Param("maxId") Integer maxId);
+    List<MyUser> findByIdBetweenOrEqualTo(@Param("minId") Integer minId, @Param("maxId") Integer maxId);
+            Integer count();
+    List<String> findDistinctUserName();
+            List<String> findDistinctUserNameOrderByGlobalIdDesc();
+    int deleteById(@Param("id") Integer id);
+            int deleteByIdBetween(@Param("minId") Integer minId, @Param("maxId") Integer maxId);
+    Integer countDistinctUserNameByAgeLessThan(@Param("maxAge") Integer maxAge);
+            MyUser findFirstByUserName(@Param("userName") String userName);
+    List<MyUser> findUserNameAndPasswordByIdBetween(@Param("minId") Integer minId, @Param("maxId") Integer maxId);
+            List<MyUser> findByIdGreaterThan(@Param("minId") Integer minId);
+    List<MyUser> findByIdLessThan(@Param("maxId") Integer maxId);
+            List<MyUser> findByIdBetween(@Param("minId") Integer minId, @Param("maxId") Integer maxId);
+    List<String> findDistinctUserNameByIdIn(@Param("idList") List<Integer> idList);
+            List<MyUser> findByAgeGreaterThanAndIdLessThan(@Param("minAge") Integer minAge, @Param("maxId") Integer maxId);
+    List<MyUser> findByAgeOrderByUserNameDesc(@Param("age") Integer age);
+            List<MyUser> findByIdInAndUserNameIn(@Param("idList") List<Integer> idList, @Param("userNameList") List<String> userNameList);
+    int updateUserNameById(@Param("updatedUserName") String updatedUserName, @Param("id") Integer id);
+            int updateUserNameAndPasswordByIdBetween(@Param("updatedUserName") String updatedUserName, @Param("updatedPassword") String updatedPassword, @Param("minId") Integer minId, @Param("maxId") Integer maxId);

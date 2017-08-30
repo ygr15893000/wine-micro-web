@@ -1,0 +1,36 @@
+<ion-modal-view>
+  <ion-content style="background:#222">
+    <div class="row">
+	    <div class="col">
+		    <div class="form_pad">
+			    <ul>
+				    <li>
+					    <img src="img/icoUserName.png" />
+					    <input type="text" placeholder="请使用手机号码作为用户名" ng-model="regData.username"/>
+				    </li>
+				    <li>
+				    	<img src="img/icoPsw.png" />
+				    	<input type="password" placeholder="请输入至少6位字符作为密码" ng-model="regData.password"/>
+				    </li>
+				    <li>
+				    	<img src="img/icoCode.png" />
+				    	<input type="text" placeholder="请输入右侧的图片验证码" ng-model="regData.securityCode"/>
+				    	<img ng-src="{{imgcode}}" ng-if="imgcodeboon" ng-click="checkcode()"/>
+				    	<img ng-src="{{imgcode}}" ng-if="!imgcodeboon" ng-click="checkcode()"/>
+				    </li>
+				    <li style="border:none">
+				    	<img src="img/icoTel.png" />
+				    	<input type="text" placeholder="请在300s内输入验证码" ng-model="regData.mobilecode"/>
+				    	<a class="sendCode">发送验证码</a>
+				    </li>
+			    </ul>
+		    </div>
+	    </div>
+    </div>
+    <div class="row">
+	    <div class="col">
+		    <a class="submit" href="#" ng-click="doReg()">完成注册</a>
+	    </div>
+    </div>
+  </ion-content>
+</ion-modal-view>

@@ -1,0 +1,90 @@
+<ion-view hide-nav-bar="true">
+  <ion-content style="background:#222">
+  <div class="row" style="background:#000;padding-bottom:0">
+	    <div class="rol col-20">
+		    <a class="kinds" ng-class="{true:'Shopping'}[suffix==1]" ng-click="suffix=1">全部</a>
+	    </div>
+	    <div class="rol col-20">
+		    <a class="kinds" ng-class="{true:'Shopping'}[suffix==2]" ng-click="suffix=2">优惠券</a>
+	    </div>
+	    <div class="rol col-20">
+		    <a class="kinds" ng-class="{true:'Shopping'}[suffix==3]" ng-click="suffix=3">代金券</a>
+	    </div>
+	    <div class="rol col-20">
+		    <a class="kinds" ng-class="{true:'Shopping'}[suffix==4]" ng-click="suffix=4">折扣券</a>
+	    </div>
+	    <div class="rol col-20">
+		    <a class="kinds" ng-class="{true:'Shopping'}[suffix==5]" ng-click="suffix=5">抵用券</a>
+	    </div>
+    </div>
+
+    <div class="row" style="margin-top:1rem;" ng-if="suffix==2||suffix==1">
+	    <div class="col col-25 disA">
+		    <dl class="discountLeft">
+			    <dd class="top"><strong>5折</strong></dd>
+			    <dd class="lineA"></dd>
+			    <dd class="bot">折扣券</dd>
+		    </dl>
+	    </div>
+	    <div class="col col-75" style="background:#000;">
+		    <dl class="discountRight">
+			    <dt>独角兽5折券</dt>
+			    <dd class="mid"><p>该代金券为独角兽会员指定折扣券，全场通用，仅新用户有权使用。</p></dd>
+			    <dd class="bot">有效期至2017-12-31</dd>
+		    </dl>
+	    </div>
+    </div>
+
+    <div class="row" style="margin-top:1rem;" ng-if="suffix==3||suffix==1">
+	    <div class="col col-25 disB">
+		    <dl class="discountLeft">
+			    <dd class="top"><strong>代</strong></dd>
+			    <dd class="lineB"></dd>
+			    <dd class="bot">代金券</dd>
+		    </dl>
+	    </div>
+	    <div class="col col-75" style="background:#000;">
+		    <dl class="discountRight">
+			    <dt>独角兽代金券</dt>
+			    <dd class="mid"><p>该代金券为独角兽会员指定折扣券，全场通用，仅新用户有权使用。</p></dd>
+			    <dd class="bot">有效期至2017-12-31</dd>
+		    </dl>
+	    </div>
+    </div>
+
+    <div class="row" style="margin-top:1rem;" ng-if="suffix==4||suffix==1">
+	    <div class="col col-25 disC">
+		    <dl class="discountLeft">
+			    <dd class="top"><strong>惠</strong></dd>
+			    <dd class="lineC"></dd>
+			    <dd class="bot">优惠券</dd>
+		    </dl>
+	    </div>
+	    <div class="col col-75" style="background:#000;">
+		    <dl class="discountRight">
+			    <dt>独角兽优惠券</dt>
+			    <dd class="mid"><p>该代金券为独角兽会员指定折扣券，全场通用，仅新用户有权使用。</p></dd>
+			    <dd class="bot">有效期至2017-12-31</dd>
+		    </dl>
+	    </div>
+    </div>
+
+    <div class="row" style="margin-top:1rem;" ng-if="suffix==5||suffix==1">
+	    <div class="col col-25 disD">
+		    <dl class="discountLeft">
+			    <dd class="top"><strong>抵</strong></dd>
+			    <dd class="lineD"></dd>
+			    <dd class="bot">抵用券</dd>
+		    </dl>
+	    </div>
+	    <div class="col col-75" style="background:#000;">
+		    <dl class="discountRight">
+			    <dt>独角兽抵用券</dt>
+			    <dd class="mid"><p>该代金券为独角兽会员指定折扣券，全场通用，仅新用户有权使用。</p></dd>
+			    <dd class="bot">有效期至2017-12-31</dd>
+		    </dl>
+	    </div>
+    </div>
+
+  </ion-content>
+</ion-view>

@@ -1,0 +1,777 @@
+html {
+	font-size: 100%;
+}
+body {
+	font-size: 1rem;
+}
+article, aside, dialog, footer, header, section, footer, nav, figure {
+	display: block;
+}
+/** 清除内外边距 **/
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td img {
+	margin: 0;
+	padding: 0;
+	letter-spacing: -1px;
+}
+input {
+	outline: none;
+}
+a {
+	text-decoration: none;
+}
+.tabs {
+	background: #000;/* 更改底部导航背景色*/
+}
+.tab-title {
+	color: #fff;/* 更改底部导航字体颜色*/
+}
+/*----------------------------注册及登录开始------------------------*/
+.form_pad{
+	background:#000;
+}
+.form_pad ul li{
+	border-bottom:1px solid #333;
+	padding:1rem;
+	color: #999;
+	overflow: hidden;
+	position: relative;
+}
+.form_pad ul li img:first-child{
+	float:left;
+	width: 1.6rem;
+	height: 1.6rem;
+}
+.form_pad ul li img:last-child{
+	float:right;
+	width: 4.6rem;
+	height: 1.8rem;
+}
+.form_pad ul li input{
+	float:left;
+	height: 1.6rem;
+	line-height: 1.6rem;
+	padding:0 1rem;
+	width:70%;
+	background:none;
+	color: #ccc;
+}
+.code{
+	position:absolute;
+	z-index: 9;
+	background:#333;
+	width:6rem;
+	height: 2rem;
+	right: 1rem;
+	bottom:0.8rem;
+	text-align: center;
+	line-height: 2rem;
+}
+a.sendCode{
+	display: block;
+	position:absolute;
+	z-index: 9;
+	height: 1.6rem;
+	line-height: 1.6rem;
+	right: 1rem;
+	color: #fff;
+	font-size: 0.9rem;
+}
+a.sendWaiting{
+	display: block;
+	position:absolute;
+	z-index: 9;
+	height: 1.6rem;
+	line-height: 1.6rem;
+	right: 1rem;
+	color: #666;
+	font-size: 0.9rem;
+}
+a.submit{
+	background:#c22523;
+	display: block;
+	color: #fff;
+	text-align:center;
+	height: 3rem;
+	line-height: 3rem;
+	width: 100%;
+}
+a.submit:active{
+	background:#8f0d0c;
+}
+.bottomTip{
+	position:fixed;
+	bottom:5rem;
+	text-align:center;
+	width:100%;
+	color: #444;
+	font-size:0.9rem
+}
+/*----------------------------注册及登录结束------------------------*/
+/*----------------------------引导页开始------------------------*/
+a.introAa{
+	display:block;
+	margin:0 auto;
+	overflow: hidden;
+}
+a.introAa img{
+	max-width: 100%;
+	float: left;
+}
+.introBot{
+	/*position: fixed;
+	bottom:0;
+	width:100%;*/
+	background:#000;
+	border-top:3px solid #bb9942
+}
+a.introAb{
+	display: block;
+	margin:0 auto;
+	width:60%;
+	height: 2.4rem;
+	line-height: 2.4rem;
+	text-align: center;
+	color: #fff;
+	font-size: 0.8rem;
+	border:1px solid #999;
+}
+a.introAb:active{
+	border:1px solid #fff;
+	color: #999;
+}
+a.introAc{
+	display: block;
+	margin:0 auto;
+	width:60%;
+	height: 2.4rem;
+	line-height: 2.4rem;
+	text-align: center;
+	color: #fff;
+	font-size: 0.8rem;
+}
+a.introAc:active{
+	color: #999;
+}
+/*----------------------------引导页结束------------------------*/
+/*----------------------------订单页开始------------------------*/
+dl.orderPad{
+	overflow: hidden;
+	height: 3.6rem;
+}
+dl.orderPad dd{
+	float:left;
+	height: 3.6rem;
+}
+dl.orderPad dd.face{
+	float:left;
+	width:3.6rem;
+	height: 3.6rem;
+	overflow: hidden;
+	margin-right: 0.4rem;
+}
+dl.orderPad dd.face img{
+	float:left;
+	max-width: 100%;
+}
+dl.orderPad dd p{
+	font-size: 0.8rem;
+	color: #999;
+	height:1rem;
+}
+dl.orderPad dd p.tit{
+	color: #fff;
+	font-size: 1rem;
+	height: 1.4rem;
+	margin-bottom:0.2rem;
+}
+dl.orderPad dd p em.discount{
+	color:#c22523;
+}
+dl.orderPad dd.check{
+	float:right;
+	background:pink;
+}
+dl.orderPad dd.check a{
+	background:#c22523;
+	color: #fff;
+	display: block;
+	text-align: center;
+	width:3.6rem;
+	height: 3.6rem;
+	line-height: 3.6rem;
+}
+dl.orderPad dd.check a:active{
+	background: #b00;
+	color: #999;
+}
+ul.orderUla li{
+	margin:0.6rem 0;
+	overflow: hidden;
+}
+ul.orderUla li.adress{
+	background:#000;
+	font-size:0.8rem;
+	padding:1rem 0.8rem 1rem 0.8rem;
+}
+p.adrTit{
+	color:#fff;
+	margin-bottom:0.4rem;
+	
+}
+dl.adrDet{
+	border:1px solid #000;
+	color: #666;
+	padding:0.6rem;
+}
+dl.adrDet:active{
+	border:1px solid #fff;
+	color: #fff;
+}
+dl.adrDet dd{
+	overflow:hidden;
+	height:1rem;
+	line-height: 1rem;
+}
+a.adAdr{
+	display:block;
+	margin-top:0.4rem;
+	width:100%;
+	height: 3rem;
+	line-height:3rem;
+	text-align: center;
+	color: #999;
+	
+}
+a.adAdr:active{
+	color:#fff;
+}
+a.pay{
+	display:block;
+	height:3rem;
+	line-height: 3rem;
+	background:#c22523;
+	color: #fff;
+	text-align: center;
+}
+a.pay:active{
+	background:#b00;
+	color: #999;
+}
+/*----------------------------订单页结束------------------------*/
+/*----------------------------个人中心开始------------------------*/
+.userPad{
+	background:url(../img/userBg.png) center top;
+	height: 6rem;
+	background-size:100%;
+	padding-top:1px;
+}
+dl.userInfo{
+	height: 4rem;
+	margin-top:1rem;
+	overflow: hidden;
+}
+dl.userInfo dd{
+	height: 4rem;
+	float:left;
+}
+p.pt{
+	height:2.2rem;
+	line-height: 2.2rem;
+	color: #fff;
+	font-size:1.4rem;
+	font-weight: bold;
+}
+
+p.pb{
+	height:1.6rem;
+	line-height: 1.6rem;
+	border-radius: 0.8rem;
+	background:#c22523;
+	text-align: center;
+	color: #fff;
+	font-size: 0.8rem;
+}
+p.pb img{
+	max-width: 0.8rem;
+	margin:0 0.2rem -0.15rem 0;
+}
+dl.userInfo dd.img{
+	width:4rem;
+	height: 4rem;
+	overflow: hidden;
+	margin-right: 1rem;
+}
+dl.userInfo dd.img img{
+	float:left;
+	max-width:4rem;
+	border:0.1rem solid #b00;
+	border-radius: 2rem;
+
+}
+dl.userInfo dd.set{
+	height: 3rem;
+	padding-top:1px;
+	float:right;
+}
+dl.userInfo dd.set a{
+	display: block;
+	width:1.4rem;
+	height: 1.4rem;
+	margin-top:1rem;
+	overflow: hidden;
+}
+dl.userInfo dd.set a img{
+	float:left;
+	max-width: 100%;
+}
+p.exTip{
+	color: #999;
+	font-size: 0.8rem;
+}
+p.exTip img{
+	max-width:1rem;
+	margin-right: 0.8rem;
+	margin-bottom:-0.2rem;
+}
+p.func{
+	font-size:0.8rem;
+	color: #ccc;
+	text-align: center;
+}
+p.func strong{
+	display:block;
+	font-size: 1.2rem;
+	color: #fff;
+}
+ul.userFunc li{
+	background:#000;
+	border-bottom:1px solid #666; 
+	padding-top:1px;
+}
+ul.userFunc li:active{
+	background:#666;
+}
+dl.userFuncDet{
+	overflow: hidden;
+	height:4.8rem;
+	margin-top:0.8rem;
+}
+dl.userFuncDet dd.ico{
+	float:left;
+	height: 5rem;
+	margin:0 0.8rem;
+}
+dl.userFuncDet dd.ico img{
+	max-width:1.8rem;
+}
+dl.userFuncDet dt{
+	display: block;
+	color:#fff;
+	margin-bottom:0.4rem;
+}
+dl.userFuncDet dd {
+	font-size:0.8rem;
+	line-height: 1rem;
+	color: #999;
+}
+/*----------------------------个人中心结束------------------------*/
+/*----------------------------首页开始------------------------*/
+dl.proList{
+	margin-top:1rem;
+	background:#666;
+	padding:4px;
+	overflow: hidden;
+}
+dl.proList dd.img{
+	position: relative;
+	display:block;
+	overflow: hidden;
+	border-bottom:4px solid #666;
+}
+dl.proList dd.img img.proImg{
+	max-width:100%;
+	float: left;
+}
+.proMask{
+	position: absolute;
+	z-index: 99;
+	background:url(../img/cbb.png) center center;
+	background-size: 100%;
+	width:100%;
+	height: 100%;
+	display: inline-block;
+	vertical-align:middle; 
+}
+
+
+dl.proList dd.intro{
+	float:left;
+	height: 3rem;
+	background: #333;
+	width:70%;
+
+}
+dl.proList dd.intro p{
+	text-indent: 0.4rem;
+	font-sisze:0.8rem;
+	color: #999;
+	height: 1.5rem;
+	line-height: 1.5rem;
+}
+dl.proList dd.intro p strong{
+	font-size:1rem;
+	color: #fff;
+}
+dl.proList dd.buy{
+	float:right;
+	width:15%;
+}
+dl.proList dd.share{
+	float:right;
+	width:15%;
+}
+
+dl.proList dd.share a,dl.proList dd.buy a{
+	display: block;
+	width:100%;
+	background:#000;
+	height: 3rem;
+	line-height: 3rem;
+	text-align: center;
+	color: #fff;
+	}
+dl.proList dd.share a{
+	background:#fc0;
+}
+dl.proList dd.buy a{
+	background:#c30d23;
+}
+
+dl.proList dd.buy a.cbu{
+	background:#888;
+	color: #eee;
+}
+/*----------------------------首页结束------------------------*/
+/*----------------------------产品包开始------------------------*/
+a.kinds{
+	display: block;
+	text-align: center;
+	font-size: 0.8rem;
+	color:#999;
+	height: 2.2rem;
+	line-height: 2.2rem;
+}
+/*----------------------------产品包结束------------------------*/
+/*----------------------------优惠券开始------------------------*/
+.disA{
+	background:#f19e38 url(../img/discountBorder.png) right center no-repeat;
+	background-size: 2%;
+}
+.disB{
+	background:#2aaae5 url(../img/discountBorder.png) right center no-repeat;
+	background-size: 2%;
+}
+.disC{
+	background:#cc3333 url(../img/discountBorder.png) right center no-repeat;
+	background-size: 2%;
+}
+.disD{
+	background:#cc336d url(../img/discountBorder.png) right center no-repeat;
+	background-size: 2%;
+}
+dl.discountLeft{
+	height: 6rem;
+}
+dl.discountLeft dd.top{
+	height:3.4rem;
+	line-height: 3.4rem;
+	color: #fff;
+	text-align: center;
+}
+dl.discountLeft dd.top strong{
+	font-size: 1.6rem;
+}
+dl.discountLeft dd.lineA{
+	height:1px;
+	background:#e6922b;
+	width: 60%;
+	margin:0 auto;
+}
+dl.discountLeft dd.lineB{
+	height:1px;
+	background:#1597d2;
+	width: 60%;
+	margin:0 auto;
+}
+dl.discountLeft dd.lineC{
+	height:1px;
+	background:#c32a2a;
+	width: 60%;
+	margin:0 auto;
+}
+dl.discountLeft dd.lineD{
+	height:1px;
+	background:#bb1c58;
+	width: 60%;
+	margin:0 auto;
+}
+dl.discountLeft dd.bot{
+	height:2.5rem;
+	line-height: 2.5rem;
+	color: #fff;
+	text-align: center;
+}
+dl.discountRight{
+	height:6rem;
+	padding:0 0.2rem 0 1rem;
+}
+dl.discountRight dt{
+	height:2rem;
+	line-height: 2rem;
+	color: #ccc;
+}
+dl.discountRight dd.mid{
+	margin-top:0.4rem;
+	height:2.4rem;
+	overflow: hidden;
+}
+dl.discountRight dd.mid p{
+	font-size: 0.8rem;
+	color: #ccc;
+	line-height: 1rem;
+}
+dl.discountRight dd.bot{
+	text-align: right;
+	color: #ccc;
+	height: 1rem;
+	font-size: 0.8rem;
+}
+/*----------------------------优惠券结束------------------------*/
+/*----------------------------邀请开始------------------------*/
+.invPad{
+	background:#000;
+	padding:1.2rem 0 0.6rem 0;
+}
+.invPad p{
+	color:#ccc;
+	font-size: 0.8rem;
+	text-align: center;
+}
+.invPad p strong{
+	font-size:1.4rem;
+	color: #fff;
+}
+a.inv,a.recharge{
+	display: block;
+	border-radius: 3px;
+	background: #c22523;
+	height: 2.6rem;
+	line-height: 2.6rem;
+	text-align:center;
+	color: #fff;
+	margin:0.5rem auto 0 auto;
+	font-weight: normal;
+}
+a.inv:active,a.recharge:active{
+	color: #ccc;
+	background:#b00;
+}
+a.inv{
+	width:30%;
+}
+a.recharge{
+	width:80%;
+}
+.invSubNav a{
+	margin-top:1rem;
+	display:block;
+	width:100%;
+	height: 3rem;
+	line-height: 3rem;
+	background:#333;
+	color: #ccc;
+	font-size: 0.8rem;
+	text-align: center;
+}
+.invSubNav_active{
+	background:#000 !important;
+	color: #fff !important;
+}
+table.dataA{
+	color:#fff;
+	width:100%;
+	font-size: 0.8rem;
+	text-align: center;
+	margin-top:1rem;
+}
+table.dataA td{
+	color:#ccc;
+	padding:1rem 0.4rem;
+	border-bottom: 1px solid #333;
+}
+/*----------------------------邀请结束------------------------*/
+/*----------------------------详情页开始------------------------*/
+.picPad {
+	overflow: hidden;
+	background: orange;
+}
+.picPad img {
+	float: left;
+	max-width: 100%;
+}
+h2.proIntro{
+	color:#fff;
+	font-size: 1.2rem;
+	border-bottom: 1px solid #333;
+	padding-bottom:1rem;
+	margin-bottom:1rem;
+}
+p.proDetail{
+	color:#ccc;
+	font-size: 0.8rem;
+	margin:1rem 0;
+}
+p.proDetail em{
+	color:#c22523;
+	margin-left: 0.2rem;
+	font-weight: bold;
+}
+a.buy,a.share{
+	display:block;
+	width:100%;
+	height: 3rem;
+	line-height: 3rem;
+	text-align: center;
+	color: #fff;
+	
+}
+a.buy{
+	background:#c22523;
+}
+a.buy:active{
+	background:#b00;
+	color: #ccc;
+}
+a.share{
+	background:#fd4a2d;
+}
+a.share:active{
+	background:#f60;
+	color: #ccc;
+}
+/*----------------------------详情页结束------------------------*/
+/*----------------------------自定义样式------------------------*/
+
+.Shopping{
+	color: #fff !important;
+	border-bottom: 1px solid #c22523 !important;
+}
+#qrcodee img{
+	width: 100%;
+	height: 100%;
+}
+.records{
+	color: #fff;
+	background-color: #333;
+}
+.record_list{
+	margin-top: 1rem;
+    display: block;
+    width: 100%;
+    height: 3rem;
+    line-height: 3rem;
+    color: #ccc;
+    font-size: 0.8rem;
+    text-align: center;
+}
+/*----------------------------个人中心-订单-详情------------------------*/
+dl.orderDetail{
+	overflow: hidden;
+	height: 5.2rem;
+}
+dl.orderDetail dt{
+	width:100%;
+	height:1rem;
+	line-height:1rem;
+	color:#fff;
+	font-weight:normal;
+	margin-bottom:0.6rem;
+	}
+dl.orderDetail dd{
+	float:left;
+	height: 3.6rem;
+}
+dl.orderDetail dd.face{
+	float:left;
+	width:3.6rem;
+	height: 3.6rem;
+	overflow: hidden;
+	margin-right: 0.4rem;
+}
+dl.orderDetail dd.face img{
+	float:left;
+	max-width: 100%;
+}
+dl.orderDetail dd p{
+	font-size: 0.8rem;
+	color: #999;
+	height:1rem;
+}
+dl.orderDetail dd p.tit{
+	color: #fff;
+	font-size: 1rem;
+	height: 1.4rem;
+	margin-bottom:0.2rem;
+}
+dl.orderDetail dd p em.discount{
+	color:#c22523;
+}
+dl.orderDetail dd.check{
+	float:right;
+	background:pink;
+}
+dl.orderDetail dd.check a{
+	background:#c22523;
+	color: #fff;
+	display: block;
+	text-align: center;
+	width:3.6rem;
+	height: 3.6rem;
+	line-height: 3.6rem;
+}
+dl.orderDetail dd.check a:active{
+	background: #b00;
+	color: #999;
+}
+ul.recipient{
+	margin-top:0.4rem;
+	}
+ul.recipient li{
+	background:#000;
+	border-bottom:1px solid #333;
+	color:#fff;
+	padding:1rem;
+	}
+ul.recipient li em{
+	color:#999;
+	}
+dl.orderDetail dd.count{
+	margin-top:2rem;
+	float:right;
+	background:pink;
+	width:1.4rem;
+	height:1.4rem;
+	line-height:1.4rem;
+	border-radius:50%;
+	text-align:center;
+	color:#333;
+	background:#fff;
+	font-size:0.8rem;
+	}
+h2.orderDetailh2{
+	font-size:1rem;
+	color:#fff;
+	margin-top:1rem;
+	font-weight:normal;
+	}
+/*----------------------------个人中心-订单-详情结束------------------------*/

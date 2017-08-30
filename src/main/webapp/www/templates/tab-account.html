@@ -1,0 +1,98 @@
+<ion-view hide-nav-bar="true">
+  <ion-content style="background:#262626">
+    <div class="userPad">
+	    <div class="row" style="padding-top:0">
+		    <div class="col" style="padding-top:0">
+			    <dl class="userInfo">
+				    <dd class="img">
+				    	<img src="img/demo2.png" />
+				    </dd>
+				    <dd>
+					    <p class="pt">{{dat.username}}</p>
+					    <p class="pb"><img src="img/memberLevela.png" />独角兽初级会员</p>
+				    </dd>
+				    <dd class="set">
+				    	<a><img src="img/sIcoSet.png" /></a>
+				    </dd>
+			    </dl>
+		    </div>
+	    </div>
+    </div>
+    <div class="row" style="background:#000">
+	    <div class="col">
+		    <p class="exTip"><img src="img/icoTip.png" />您最近有一笔订单已经到达云南省昆明市顺丰高新区配送点</p>
+	    </div>
+    </div>
+    <div class="row" style="margin-top:1rem;">
+	    <div class="col">
+		    <p class="func" ui-sref="tab.classify">
+		    	<strong>{{dat.orderCount}}</strong>待付款订单
+		    </p>
+	    </div>
+	    <div class="col" ui-sref="tab.invite">
+		    <p class="func">
+		    	<strong>{{dat.recommendUserCount}}</strong>共邀请用户
+		    </p>
+	    </div>
+	    <div class="col" ui-sref="tab.discount">
+		    <p class="func">
+		    	<strong>{{dat.couponCount}}</strong>共有优惠券
+		    </p>
+	    </div>
+<div class="col">
+		    <p class="func" ui-sref="tab.invite_capital"><strong>{{dat.usableSum|evilmoney}}</strong>可用余额(元)</p>
+	    </div>
+    </div>
+    <div class="row">
+	    <div class="col">
+		    <ul class="userFunc">
+			    <li ui-sref="tab.classify">
+				    <dl class="userFuncDet">
+					    <dd class="ico">
+					    	<img src="img/icoUserFunca.png" />
+					    </dd>
+					    <dt>订单</dt>
+					    <dd>已付订金订单、待付款订单、待收货订单以及完成的订单都在这里查看</dd>
+				    </dl>
+			    </li>
+			    <li ui-sref="tab.classify">
+				    <dl class="userFuncDet">
+					    <dd class="ico">
+					    	<img src="img/icoUserFuncb.png" />
+					    </dd>
+					    <dt>产品包</dt>
+					    <dd>所有平台可以分享的产品都以打包的形式放在这里面，找到想要分享的产品就可立即进行分享</dd>
+				    </dl>
+			    </li>
+			    <li ui-sref="tab.discount">
+				    <dl class="userFuncDet">
+					    <dd class="ico">
+					    	<img src="img/icoUserFuncc.png" />
+					    </dd>
+					    <dt>优惠券</dt>
+					    <dd>平台优惠券、商家优惠券、打折卡、现金红包等福利都在这个里面查看</dd>
+				    </dl>
+			    </li>
+			    <li ui-sref="tab.invite">
+				    <dl class="userFuncDet">
+					    <dd class="ico">
+					    	<img src="img/icoUserFuncd.png" />
+					    </dd>
+					    <dt>推荐信息</dt>
+					    <dd>查看推荐人信息、推荐人购买记录、平台佣金都在这里，点击进入就可以查看详情</dd>
+				    </dl>
+			    </li><!--
+			    <li style="border:none">
+				    <dl class="userFuncDet">
+					    <dd class="ico">
+					    	<img src="img/icoUserFunce.png" />
+					    </dd>
+					    <dt>更改绑定手机号</dt>
+					    <dd>更改已绑定手机号码，该操作需要人工审核，会有至少1-3个工作日</dd>
+				    </dl>
+			    </li>-->
+		    </ul>
+	    </div>
+    </div>
+  </ion-content>
+</ion-view>

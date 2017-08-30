@@ -1,0 +1,47 @@
+<ion-view hide-nav-bar="true">
+  <ion-content style="background:#262626">
+    <div class="row"  ng-repeat="x in entry">
+	    <div class="col">
+		    <dl class="proList">
+			    <dd class="img">
+			    	<a ng-click="circumstance(x.id)">
+			    		<img class="proImg" ng-src="http://1w771143s8.iok.la/upload/{{x.image}}" />
+			    	</a>
+			    </dd>
+			    <dd class="intro">
+			    	<a ng-click="circumstance(x.id)">
+					    <p><strong>{{x.title}}</strong></p>
+					    <p>价格：{{x.price}}元/瓶</p>
+					</a>
+			    </dd>
+			    <!-- ng-click="$event.stopPropagation();"阻止冒泡 -->
+			    <dd class="buy" ng-click="order(x)" ng-if="x.status!=2" style="cursor:pointer;"> 
+			    	<a>预购</a>
+			    </dd>
+			    <dd class="buy" ng-if="x.status==2"> 
+			    	<a style="color:#eee;background-color:#888;">预购</a>
+			    </dd>
+			    <dd class="share" ng-click="share(x)">
+			    	<a>分享</a>
+			    </dd>
+		    </dl>
+		     <dl class="proList" ng-if="x.status==2">
+			    <dd class="img">
+				    <div class="proMask"></div>
+				    <img class="proImg" src="img/demo4.png" />
+			    </dd>
+			    <dd class="intro">
+				    <p><strong>{{x.title}}</strong></p>
+				    <p>价格：{{x.price}}元/瓶</p>
+			    </dd>
+			    <dd class="buy">
+			    	<a class="cbu">预购</a>
+			    </dd>
+			    <dd class="share" ng-click="share(x)">
+			    	<a>分享</a>
+			    </dd>
+		    </dl>
+	    </div>
+    </div>
+  </ion-content>
+</ion-view>

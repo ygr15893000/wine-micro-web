@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quartz>
+    <job>
+        <job-detail>
+            <name>job_JobTaskService</name>
+            <group>job_group1</group>
+            <job-class>com.siran.AppReceivedJob</job-class>
+        </job-detail>
+        <trigger>
+            <cron>
+                <name>JobTaskServiceCronTrigger</name>
+                <group>JobTaskService</group>
+                <job-name>job_JobTaskService</job-name>
+                <job-group>job_group1</job-group>
+                <cron-expression>0 0/2 * * * ?</cron-expression>
+            </cron>
+        </trigger>
+    </job>
+</quartz>

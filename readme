@@ -1,0 +1,61 @@
+1   基本框架    Spring + Spingmvc + spring-jdbc + thymleaf(jsp)
+
+
+
+2   基础功能
+    验证码 /code/validateImage
+    单个文件上传 demo /upload/index       实际url /upload
+    多个文件上传 demo /uploadMultiPage    实际url /uploadMulti
+
+
+
+
+3   保健酒 模块 包com.siran.wine.*
+                                dao          //数据访问 如JdbcTestDao
+
+                                    private JdbcTemplate jdbcTemplate;
+
+                                    @Autowired
+                                    public void setDataSource(DataSource dataSource) {
+                                        this.jdbcTemplate = new JdbcTemplate(dataSource);
+                                    }
+
+                                model        //对应数据库表结构的bean
+                                service      //定义接口 以字母I开头 如 IUserService
+                                service.impl //service 具体实现
+                                web          //controller 控制器
+
+
+
+
+4   常用注解
+            @Autowired  自动注入
+
+            @Repository  定义一个dao
+
+            @Service 定义一个 service
+
+            @Controller 定义控制器
+            @RestController是@Controller和@ResponseBody
+
+
+
+5   logger 日志
+            要求每个.java 文件都要加logger 如
+            private final Logger logger = LoggerFactory.getLogger(WelcomeController.class);
+
+
+6   配置 application.properties
+    取值方式
+    @Autowired
+        private EnvironmentConfig config;
+
+        ...
+        config.getProperty("upload-path")
+
+
+
+7   微信相关接口
+
+    获取用户基本信息（包括UnionID机制）
+    http://localhost:8088//wx/user/info?openid=oJ2FzuJp0ASvN4I7ccmC6oLmT4q0
