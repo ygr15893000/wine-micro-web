@@ -3,6 +3,7 @@ package com.siran.wine.web.order;
 import com.siran.common.constant.DefineConstant;
 import com.siran.wine.model.TAddress;
 import com.siran.wine.model.TOrder;
+import com.siran.wine.model.TWithdraw;
 import com.siran.wine.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -89,12 +90,17 @@ public class OrderController {
         return orderService.payRefund(order);
     }
 
-
+    //用户提现申请
     @RequestMapping(value = "wx/promotion/transfers")
     @ResponseBody
     public Map transfers(TOrder order) {
         return orderService.transfers(order);
     }
+
+    //后台提现申请：此处调用微信
+    @RequestMapping(value = "wx/promotion/systemTransfers")
+    @ResponseBody
+    public Map systemTransfers(TWithdraw withdraw){return orderService.sureTwithdraw(withdraw);}
 
     //退货确认收货
     @RequestMapping(value = "/order/tuishou")

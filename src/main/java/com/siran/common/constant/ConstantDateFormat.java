@@ -15,6 +15,10 @@ public class ConstantDateFormat {
      * yyyy-MM-dd
      */
     public static final SimpleDateFormat  SF_Y_M_D = new SimpleDateFormat("yyyy-MM-dd");
+    /**
+     * yyyyMMdd
+     */
+    public static final SimpleDateFormat  SF_YMD = new SimpleDateFormat("yyyyMMdd");
 
 
     public static void main(String[] args) {

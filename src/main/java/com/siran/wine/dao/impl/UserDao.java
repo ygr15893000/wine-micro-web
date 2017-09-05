@@ -35,7 +35,7 @@ public class UserDao extends BaseDao {
 
     //用户登录
     public TUser login(TUser user) throws Exception {
-        return (TUser)this.jdbcTemplate.queryForObject("select u.id,username,password,refferee,lastIP,createTime,usableSum,headImg,isLoginLimit,realName,sex,birthday,idNo,acount,level ,twu.openid " +
+        return (TUser)this.jdbcTemplate.queryForObject("select u.id,username,password,refferee,lastIP,createTime,usableSum,freezeSum,headImg,isLoginLimit,realName,sex,birthday,idNo,acount,level ,twu.openid " +
                         "                              from t_user u left JOIN  t_weixin_user twu on u.id= twu.userId " +
                         "                               where   username = ? and password = ?"
                 , new Object[]{user.getUsername(), user.getPassword()}
@@ -79,6 +79,7 @@ public class UserDao extends BaseDao {
                                 "lastIP,\n" +
                                 "createTime,\n" +
                                 "usableSum,\n" +
+                                "freezeSum,\n" +
                                 "headImg,\n" +
                                 "realName,\n" +
                                 "sex,\n" +
@@ -91,6 +92,25 @@ public class UserDao extends BaseDao {
                                 "u.id = ?",
                         new Object[]{id}, new UserRowMapper()
                 );
+        return user;
+    }
+
+    //根据用户id查询用户信息
+    public TUser getUserById(Integer id) {
+        TUser user = (TUser) this.jdbcTemplate.queryForObject
+                ("select * from t_user where id = ?",
+                        new Object[]{id}, new RowMapper() {
+                            @Override
+                            public Object mapRow(ResultSet rs, int i) throws SQLException {
+                                TUser user = new TUser();
+                                user.setId(rs.getInt("id"));
+                                user.setUsername(rs.getString("username"));
+                                user.setRefferee(rs.getString("refferee"));
+                                user.setUsableSum(rs.getBigDecimal("usableSum"));
+                                user.setFreezeSum(rs.getBigDecimal("freezeSum"));
+                                return user;
+                            }
+                        });
         return user;
     }
 
@@ -171,6 +191,7 @@ public class UserDao extends BaseDao {
             user.setLastIP(rs.getString("lastIP"));
             user.setCreateTime(rs.getDate("createTime"));
             user.setUsableSum(rs.getBigDecimal("usableSum"));
+            user.setFreezeSum(rs.getBigDecimal("freezeSum"));
             user.setHeadImg(rs.getString("headImg"));
             user.setRealName(rs.getString("realName"));
             user.setSex(rs.getInt("sex"));

@@ -30,10 +30,21 @@ public enum EnumReturnCode {
     error_109("109","数据操作失败"),
     error_110("110","参数非法"),
     //******** warn 400 ~ 499
-    warn_401("401","警告");
+    warn_401("401","警告"),
 
 
 
+
+
+    //其他特殊业务类型
+
+    fundMode_1("1","商品购买"),
+    fundMode_2("2","充值"),
+    fundMode_3("3","冻结提现金额"),
+    fundMode_4("4","提现成功，扣除冻结金额"),
+    fundMode_5("5","提成发放"),
+    fundMode_6("6","退货"),
+    ;
 
 
     private String code;
@@ -54,7 +65,7 @@ public enum EnumReturnCode {
 
     @Override
     public String toString() {
-        return "EnunReturnCode{" +
+        return "EnumReturnCode{" +
                 "code='" + code + '\'' +
                 ", desc='" + desc + '\'' +
                 '}';

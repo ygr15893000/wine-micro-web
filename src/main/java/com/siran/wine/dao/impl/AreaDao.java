@@ -2,9 +2,11 @@ package com.siran.wine.dao.impl;
 
 import com.siran.wine.model.TArea;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -18,7 +20,7 @@ import java.util.List;
 public class AreaDao {
 
     private JdbcTemplate jdbcTemplate;
-
+    
     @Autowired
     public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);

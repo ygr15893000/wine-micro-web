@@ -1,6 +1,8 @@
 package com.siran.wine.dao.impl;
 
 import com.siran.wine.dao.BaseDao;
+import com.siran.wine.model.TCoupon;
+import com.siran.wine.model.TCouponHis;
 import com.siran.wine.model.TOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -12,6 +14,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.math.BigDecimal;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -242,7 +245,40 @@ public class OrderDao extends BaseDao {
         }
     }
 
+    /**
+     * 根据id更新金额
+     * @param decimal
+     * @param id
+     * @return
+     */
+    public Integer updateTorderAmount(BigDecimal decimal,int id){
+        final String sql = "UPDATE t_order SET amount = amount - ? WHERE id = ?";
+        return jdbcTemplate.update(sql,new Object[]{decimal,id});
+
+    }
 
 
+    /**
+     *
+     * @param tCoupon
+     * @return
+     */
+    public Integer updateTcouponStatus(TCoupon tCoupon){
+        final String sql = "UPDATE t_coupon SET STATUS = ?,ordId =? WHERE id = ?";
+        return jdbcTemplate.update(sql,new Object[]{"2",tCoupon.getOrdId(),tCoupon.getId()});
+
+    }
+
+
+    public Integer insertTcouponHisList(TCouponHis tCouponHis){
+        final String sql = "INSERT INTO t_coupon_his (userId,couponId,amount,TYPE) VALUES (?,?,?,?)";
+        return jdbcTemplate.update(sql,new Object[]{
+            tCouponHis.getUserId(),
+            tCouponHis.getCouponId(),
+            tCouponHis.getAmount(),
+            tCouponHis.getType()    
+        });
+
+    }
 
 }

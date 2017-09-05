@@ -18,8 +18,8 @@ public class TOrder implements Serializable {
     private short num;//数量
     private BigDecimal amount;//总金额
     private BigDecimal realAmount;//需实付总金额
-    private BigDecimal firstPay;//首付款
-    private BigDecimal endPay;//需付尾款
+    private BigDecimal firstPay = new BigDecimal("0");//首付款
+    private BigDecimal endPay = new BigDecimal("0");//需付尾款
     private Integer status;//状态：1、未付款，2、待付尾款 3、已付款，4、待发货，5、已发货，6、交易成功，7、交易关闭
     private String createTime;//订单创建时间
     private String updateTime;//订单更新时间

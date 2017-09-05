@@ -20,7 +20,7 @@ public class WXPayConfigImpl extends WXPayConfig{
 //        String certPath = environmentConfig.getProperty("wx.cert");
         String certPath = "/Users/guangrongyang/IdeaProjects/wine-micro-web/src/main/resources/apiclient_cert.p12";
 //        String certPath = "/home/admin/web/data/apiclient_cert.p12";
-        System.out.printf("certPath:"+certPath);
+//        System.out.printf("certPath:"+certPath);
         File file = new File(certPath);
         InputStream certStream = new FileInputStream(file);
         this.certData = new byte[(int) file.length()];

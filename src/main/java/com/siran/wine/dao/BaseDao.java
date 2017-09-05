@@ -12,6 +12,7 @@ public abstract class BaseDao implements IBaseDao{
         return null;
     }
 
+
     @Override
     public Iterable save(Iterable var) {
         return null;
@@ -80,4 +81,5 @@ public abstract class BaseDao implements IBaseDao{
     public int update(Iterable var) {
         return 0;
     }
+
 }

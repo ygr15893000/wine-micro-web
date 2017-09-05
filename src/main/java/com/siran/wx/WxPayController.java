@@ -85,9 +85,6 @@ public class WxPayController {
         LOGGER.info("  WxPaySendData对象：  " + wxPaySendData.toString());
         LOGGER.info("  Torder对象：  " + order.toString());
         final Integer couponId = order.getCouponId();
-
-
-
         Map<String, String> map = new HashMap<>();
         String out_trade_no;
         int id = order.getId();
@@ -151,9 +148,22 @@ public class WxPayController {
             if (couponId > 0) {
                 //代金券金额
                 final BigDecimal price = coupon.getPrice();
-                //TODO update t_order set amount =amount -price
-                //TODO t_coupon  set status=2  ordId=?
-                //TODO  insert t_coupon_his
+                // update t_order set amount =amount -price
+                orderDao.updateTorderAmount(price,id);
+
+                // t_coupon  set status=2  ordId=?
+                coupon.setOrdId(id);
+                coupon.setId(couponId);
+                orderDao.updateTcouponStatus(coupon);
+
+                //  insert t_coupon_his
+                TCouponHis tCouponHis = new TCouponHis();
+                tCouponHis.setUserId(Long.valueOf(order.getUserId()));
+                tCouponHis.setCouponId(Long.valueOf(couponId));
+                tCouponHis.setAmount(price);
+                tCouponHis.setType(2);
+                orderDao.insertTcouponHisList(tCouponHis);
+
             }
 
             tOrder = orderService.getOrderInformationById(id);

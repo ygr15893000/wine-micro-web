@@ -1,6 +1,7 @@
 package com.siran.wine.service;
 
 import com.siran.wine.model.TOrder;
+import com.siran.wine.model.TWithdraw;
 
 import java.util.List;
 import java.util.Map;
@@ -107,5 +108,12 @@ public interface OrderService {
      * @return
      */
     Map updateorderByresultsta(TOrder order);
+
+    /**
+     * 后台调用企业支付
+     * @param order
+     * @return
+     */
+    Map sureTwithdraw(TWithdraw withdraw);
 }
 

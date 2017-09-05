@@ -67,8 +67,8 @@ public class CouponDao extends BaseDao {
                                 tCoupon.setId(rs.getInt("id"));
                                 tCoupon.setPrice(rs.getBigDecimal("price"));
                                 tCoupon.setStatus(rs.getByte("status"));
-                                tCoupon.setCreated(rs.getString("beginDate"));
-                                tCoupon.setCreated(rs.getString("endDate"));
+                                tCoupon.setBeginDate(rs.getString("beginDate"));
+                                tCoupon.setEndDate(rs.getString("endDate"));
                                 tCoupon.setPartnerTradeNo(rs.getString("partnerTradeNo"));
                                 return tCoupon;
                             }

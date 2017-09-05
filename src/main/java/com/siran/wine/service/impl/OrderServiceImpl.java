@@ -47,6 +47,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private ItemDao itemDao;
+    @Autowired
+    private FundrecordDao fundrecordDao;
 
     @Override
     public TOrder addOrder(TOrder order) {
@@ -223,12 +225,51 @@ public class OrderServiceImpl implements OrderService {
 
     //更改订单状态通过订单号
     @Override
+    @Transactional
     public Integer updateSatusByOrderNo(TOrder order) {
-        StringBuffer sql = new StringBuffer("update t_order set status = ?,realAmount =realAmount+ ? where orderNO = ?");
-        Object[] var = new Object[]{order.getStatus(),order.getRealAmount(),order.getOrderNO()};
+        StringBuffer sql ;
+        Object[] var  = new Object[]{order.getStatus(),order.getRealAmount(),order.getOrderNO()};
+        if (order.getStatus() ==2){
+            sql = new StringBuffer("update t_order set firstPaymentTime =CURRENT_TIMESTAMP(), status = ?,realAmount =realAmount+ ? where orderNO = ?");
+        }else {
+            sql = new StringBuffer("update t_order set paymenTime =CURRENT_TIMESTAMP(), status = ?,realAmount =realAmount+ ? where orderNO = ?");
+
+        }
 
 
-        return orderDao.updateOrderCallBack(sql.toString(),var);
+
+        final int userId = order.getUserId();
+        final TUser user = userDao.getUserById(userId);
+        TFundrecord fundrecord = new TFundrecord();
+        EnumReturnCode enumReturnCode = null;
+        final BigDecimal amount = order.getAmount();
+        if (order.getType() ==1){
+            enumReturnCode = EnumReturnCode.fundMode_1;
+            fundrecord.setIncome(new BigDecimal("0"));
+            fundrecord.setUsableSum(user.getUsableSum());
+
+            //充值
+        }else if (order.getType() == 2) {
+            enumReturnCode = EnumReturnCode.fundMode_2;
+            fundrecord.setIncome(amount);
+            fundrecord.setUsableSum(user.getUsableSum().add(amount));
+
+
+        }
+        fundrecord.setUserId(userId);
+        fundrecord.setOperateType(Integer.valueOf(enumReturnCode.getCode()));
+        fundrecord.setFundMode(enumReturnCode.getDesc());
+        fundrecord.setHandleSum(amount);
+
+        fundrecord.setFreezeSum(user.getFreezeSum());
+        fundrecord.setRemarks(enumReturnCode.getDesc());
+        fundrecord.setCost(new BigDecimal("0"));
+        fundrecord.setSpending(new BigDecimal("0"));
+
+
+        final Integer i = fundrecordDao.save(fundrecord);
+        final Integer j = orderDao.updateOrderCallBack(sql.toString(), var);
+        return i+j;
     }
 
     //订单号是否存在
@@ -307,6 +348,31 @@ public class OrderServiceImpl implements OrderService {
                 //调用微信退款接口成功后执行t_order表更新操作status = 5
                 order.setOutRefundTime(ConstantDateFormat.SF_FULL.format(new Date()));
                 Integer nums = orderDao.upadateRefundTime(order);
+
+                // fundrecord beigin
+                final int userId = order.getUserId();
+                final TUser user = userDao.getUserById(userId);
+                TFundrecord fundrecord = new TFundrecord();
+                EnumReturnCode enumReturnCode = EnumReturnCode.fundMode_6;
+                final BigDecimal amount = order.getAmount();
+
+                fundrecord.setIncome(new BigDecimal("0"));
+                fundrecord.setUsableSum(user.getUsableSum());
+
+
+                fundrecord.setUserId(userId);
+                fundrecord.setOperateType(Integer.valueOf(enumReturnCode.getCode()));
+                fundrecord.setFundMode(enumReturnCode.getDesc());
+                fundrecord.setHandleSum(amount);
+
+                fundrecord.setFreezeSum(user.getFreezeSum());
+                fundrecord.setRemarks(enumReturnCode.getDesc());
+                fundrecord.setCost(new BigDecimal("0"));
+                fundrecord.setSpending(new BigDecimal("0"));
+
+                final Integer i = fundrecordDao.save(fundrecord);
+                // fundrecord end
+
                 if (nums > 0) {
                     map.put(DefineConstant.CODE, EnumReturnCode.success_000.getCode());
                     map.put(DefineConstant.DESC, EnumReturnCode.success_000.getDesc());
@@ -372,41 +438,28 @@ public class OrderServiceImpl implements OrderService {
         LOGGER.info("未调用微信接口前更新t_withdraw状态为：" + twt_id);
         LOGGER.info("未调用微信接口前更新t_user状态为：" + upd);
         if (twt_id > 0 && upd) {
-            //更新t_withdraw,User都成功以后，调用微信退款
-            final Map transfers = wxPayController.transfers(order, user);
-            LOGGER.info("返回参数map===" + transfers);
-            if (!transfers.get("return_code").equals(WXPayConstants.SUCCESS)) {
-                //调用微信接口失败，更新t_withdraw  status状态
-                tWithdrawDao.updateTwiths(twt_id);
-                map.put(DefineConstant.CODE, transfers.get("return_msg"));
-                map.put(DefineConstant.DESC, transfers.get("return_msg"));
-                return map;
-            }
 
-            if (!transfers.get("result_code").equals(WXPayConstants.SUCCESS)) {
-                //调用微信接口失败，更新t_withdraw  status状态
-                tWithdrawDao.updateTwiths(twt_id);
-                map.put(DefineConstant.CODE, transfers.get("err_code"));
-                map.put(DefineConstant.DESC, transfers.get("err_code_des"));
-                return map;
-            }
+            // fundrecord beigin
+            final int userId = order.getUserId();
+            TFundrecord fundrecord = new TFundrecord();
+            EnumReturnCode enumReturnCode = EnumReturnCode.fundMode_3;
 
-            //TODO update  表 t_withdraw.status,提现成功时间，set User 冻结=冻结-amount
-            String times = ConstantDateFormat.SF_FULL.format(new Date());
-            boolean upateTw = tWithdrawDao.updateTwithdrawsStatus(times, twt_id);
-            boolean updateUs = userDao.updateUserFreeSum(amount, user.getId());
-            LOGGER.info("调用微信成功接口后更新t_withdraw状态为：" + upateTw);
-            LOGGER.info("调用微信成功接口后更新t_user状态为：" + updateUs);
-            if (upateTw && updateUs) {
-                map.put(DefineConstant.CODE, EnumReturnCode.success_000.getCode());
-                map.put(DefineConstant.DESC, EnumReturnCode.success_000.getDesc());
-            } else {
-                //微信支付调用成功：update t_withdraw,User表数据失败
-                map.put(DefineConstant.CODE, EnumReturnCode.error_109.getCode());
-                map.put(DefineConstant.DESC, EnumReturnCode.error_109.getDesc());
+            fundrecord.setIncome(new BigDecimal("0"));
+            fundrecord.setUsableSum(user.getUsableSum().subtract(amount));
 
-            }
 
+            fundrecord.setUserId(userId);
+            fundrecord.setOperateType(Integer.valueOf(enumReturnCode.getCode()));
+            fundrecord.setFundMode(enumReturnCode.getDesc());
+            fundrecord.setHandleSum(amount);
+
+            fundrecord.setFreezeSum(user.getFreezeSum().add(amount));
+            fundrecord.setRemarks(enumReturnCode.getDesc());
+            fundrecord.setCost(new BigDecimal("0"));
+            fundrecord.setSpending(new BigDecimal("0"));
+            fundrecordDao.save(fundrecord);
+            map.put(DefineConstant.CODE, EnumReturnCode.success_000.getCode());
+            map.put(DefineConstant.DESC, EnumReturnCode.success_000.getDesc());
         } else {
             //update t_withdraw,User表数据失败
             map.put(DefineConstant.CODE, EnumReturnCode.error_109.getCode());
@@ -414,6 +467,81 @@ public class OrderServiceImpl implements OrderService {
         }
         return map;
     }
+
+    /**
+     * 提现方法抽出，用于后台调用微信
+     * @param withdraw
+     * @return
+     */
+    @Transactional
+    public Map sureTwithdraw(TWithdraw withdraw){
+        Map map = new HashMap();
+        final TUser user = userDao.getTUserById(withdraw.getUserId());
+        final BigDecimal amount = withdraw.getSum();
+        TOrder order = new TOrder();
+        order.setOrderNO(withdraw.getPartnerTradeNo());
+        order.setAmount(amount);
+        LOGGER.info("申请企业付款 金额：" + amount + " user:" + user.toString());
+        final Map transfers = wxPayController.transfers(order, user);
+        LOGGER.info("返回参数map===" + transfers);
+        if (!transfers.get("return_code").equals(WXPayConstants.SUCCESS)) {
+            //调用微信接口失败，更新t_withdraw  status状态
+            tWithdrawDao.updateTwiths(withdraw.getId());
+            map.put(DefineConstant.CODE, transfers.get("return_msg"));
+            map.put(DefineConstant.DESC, transfers.get("return_msg"));
+            return map;
+        }
+
+        if (!transfers.get("result_code").equals(WXPayConstants.SUCCESS)) {
+            //调用微信接口失败，更新t_withdraw  status状态
+            tWithdrawDao.updateTwiths(withdraw.getId());
+            map.put(DefineConstant.CODE, transfers.get("err_code"));
+            map.put(DefineConstant.DESC, transfers.get("err_code_des"));
+            return map;
+        }
+
+        //update  表 t_withdraw.status,提现成功时间，set User 冻结=冻结-amount
+        String times = ConstantDateFormat.SF_FULL.format(new Date());
+        boolean upateTw = tWithdrawDao.updateTwithdrawsStatus(times,withdraw.getId());
+        boolean updateUs = userDao.updateUserFreeSum(amount, user.getId());
+        LOGGER.info("调用微信成功接口后更新t_withdraw状态为：" + upateTw);
+        LOGGER.info("调用微信成功接口后更新t_user状态为：" + updateUs);
+
+        if (upateTw && updateUs) {
+            map.put(DefineConstant.CODE, EnumReturnCode.success_000.getCode());
+            map.put(DefineConstant.DESC, EnumReturnCode.success_000.getDesc());
+        } else {
+            //微信支付调用成功：update t_withdraw,User表数据失败
+            map.put(DefineConstant.CODE, EnumReturnCode.error_109.getCode());
+            map.put(DefineConstant.DESC, EnumReturnCode.error_109.getDesc());
+
+        }
+
+        final int userId = withdraw.getUserId();
+        TFundrecord fundrecord = new TFundrecord();
+        // fundrecord beigin
+        fundrecord = new TFundrecord();
+        EnumReturnCode enumReturnCode = EnumReturnCode.fundMode_4;
+
+        fundrecord.setIncome(new BigDecimal("0"));
+        fundrecord.setUsableSum(user.getUsableSum().subtract(amount));
+
+
+        fundrecord.setUserId(userId);
+        fundrecord.setOperateType(Integer.valueOf(enumReturnCode.getCode()));
+        fundrecord.setFundMode(enumReturnCode.getDesc());
+        fundrecord.setHandleSum(amount);
+
+        fundrecord.setFreezeSum(user.getFreezeSum());
+        fundrecord.setRemarks(enumReturnCode.getDesc());
+        fundrecord.setCost(new BigDecimal("0"));
+        fundrecord.setSpending(amount);
+
+        final Integer i = fundrecordDao.save(fundrecord);
+        // fundrecord end
+        return map;
+    }
+
 
     /**
      * 根据订单状态 更改状态（收货退货）

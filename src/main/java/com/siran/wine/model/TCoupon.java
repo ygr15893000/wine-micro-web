@@ -7,7 +7,7 @@ import java.math.BigDecimal;
  */
 public class TCoupon {
 
-    private int id ;
+    private Integer id =0;
     private Integer userId;
     private BigDecimal price;
     private byte status;
@@ -16,15 +16,15 @@ public class TCoupon {
     private String endDate;
     private String partnerTradeNo;
     private String updated;
+    private Integer ordId ;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
-
     public Integer getUserId() {
         return userId;
     }
@@ -89,4 +89,27 @@ public class TCoupon {
         this.updated = updated;
     }
 
+    public Integer getOrdId() {
+        return ordId;
+    }
+
+    public void setOrdId(Integer ordId) {
+        this.ordId = ordId;
+    }
+
+    @Override
+    public String toString() {
+        return "TCoupon{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", price=" + price +
+                ", status=" + status +
+                ", created='" + created + '\'' +
+                ", beginDate='" + beginDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", partnerTradeNo='" + partnerTradeNo + '\'' +
+                ", updated='" + updated + '\'' +
+                ", ordId=" + ordId +
+                '}';
+    }
 }
